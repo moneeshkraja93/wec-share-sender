@@ -1,0 +1,89 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<link rel="stylesheet" href="style3.css">
+		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+		<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+		<title>Sign In</title>
+	</head>
+	<body>
+		<body>
+		<div class="wrapper">
+		<form id="MainForm">
+			<h1>WEC Login</h1>
+
+			<div class="input-box">
+				<input type="email" placeholder="Email ID" id="emailInp" required>
+				<i class='bx bxs-envelope'></i>
+			</div>
+			<div class="input-box">
+				<input type="password" placeholder="Password" id="passwordInp"required>
+				<i class='bx bxs-lock-alt'></i>
+			</div>
+			
+			<button type="submit" class="btn1">Login</button>
+
+		</form>
+		<script type="module">
+  			
+  			import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+			import { getDatabase, get, ref, child  } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+			import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+ 			import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
+  			// TODO: Add SDKs for Firebase products that you want to use
+  			// https://firebase.google.com/docs/web/setup#available-libraries
+
+  			// Your web app's Firebase configuration
+  			// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  			const firebaseConfig = {
+  					apiKey: "AIzaSyCBz71guPcPCaPTl4giB0KKHwAbflGeOEw",
+  					authDomain: "login-final-project-502e3.firebaseapp.com",
+  					databaseURL: "https://login-final-project-502e3-default-rtdb.firebaseio.com",
+  					projectId: "login-final-project-502e3",
+  					storageBucket: "login-final-project-502e3.appspot.com",
+  					messagingSenderId: "178356322399",
+  					appId: "1:178356322399:web:c64e74dc28f638a261dbea",
+  					measurementId: "G-LJJ89BZMMM"
+			};
+
+  			// Initialize Firebase
+  			const app = initializeApp(firebaseConfig);
+			const db = getDatabase();
+			const auth = getAuth(app);
+			const dbref = ref(db);
+			
+  			const analytics = getAnalytics(app);
+
+			let EmailInp = document.getElementById('emailInp');
+			let PassInp = document.getElementById('passwordInp');
+			let MainForm = document.getElementById('MainForm');
+			let SignInUser = evt =>{
+				evt.preventDefault();
+				
+				signInWithEmailAndPassword(auth, EmailInp.value, PassInp.value)
+				.then((credentials)=>{
+					console.log(credentials);
+					get(child(dbref, 'UsersAuthList/' + credentials.user.uid)).then((snapshot)=>{
+						if(snapshot.exists){
+							sessionStorage.setItem("user-info",JSON.stringify({
+								hospname:snapshot.val().hospname
+							}))
+							sessionStorage.setItem("user-creds",JSON.stringify(credentials.user))
+							window.location.href='index.html'
+						}
+					})
+					alert("Login Successful");
+				})
+				.catch((error) =>{
+					alert(error.message);
+					console.log(error.code);
+					console.log(error.message);
+				})
+			}
+			MainForm.addEventListener('submit',SignInUser);
+		</script>
+	
+	</body>
+</html>
