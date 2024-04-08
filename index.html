@@ -15,7 +15,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="style2.css">
-  <title>WEC Hospital</title>
+  <title>WCE</title>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3403539919880614"
     crossorigin="anonymous"></script>
   <script>
@@ -89,14 +89,15 @@ function handleFiles(files) {
     </div>
   </div>
   <div class="card">
-    <h1>WEC Share</h1>
+    <h1>WCE Share</h1>
 
     <h2>Upload ZIP File</h2>
-    <input type="file" id="file" onchange="flesize()" /><br>
+    <iframe
+    src="https://script.google.com/macros/s/AKfycbwqO2ZFhFOO0M2G92c5sxwO2oNZgIcPD6EbYVpX1ocYyFqof0J5Kacc59WaP0bY9niM/exec"
+    width="280"
+    height="200" style="background-color: transparent;"></iframe>
     
-    <center><button id="upload" onclick="uploadImage()">Upload<img id="uping" src="upload.png" alt="none" /></button>
-    </center>
-
+    
     <center>
       <div id="ShowUniqueID" hidden>
         <p>Unique ID</p><input type="text" id="showunique" value="23456" disabled></input>
@@ -104,7 +105,7 @@ function handleFiles(files) {
     </center>
     <!-- <br> -->
     <div class="Download" id="downloadiv">
-      <h2>Receive ZIP File</h2>
+      <h2>Receive File</h2>
 
       <input type="text" id="unique" placeholder="Enter Unique ID"><br>
       <center><button id="show" onclick="showimage()">Download<img id="downimg" src="download.png"
