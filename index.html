@@ -91,11 +91,16 @@ function handleFiles(files) {
   <div class="card">
     <h1>WCE Share</h1>
 
-    <h2>Upload ZIP File</h2>
     <iframe
     src="https://script.google.com/macros/s/AKfycbwqO2ZFhFOO0M2G92c5sxwO2oNZgIcPD6EbYVpX1ocYyFqof0J5Kacc59WaP0bY9niM/exec"
     width="280"
     height="200" style="background-color: transparent;"></iframe>
+    
+    <h2>Upload ZIP File</h2>
+    <input type="file" id="file" onchange="flesize()" /><br>
+    
+    <center><button id="upload" onclick="uploadImage()">Upload<img id="uping" src="upload.png" alt="none" /></button>
+    </center>
     
     
     <center>
